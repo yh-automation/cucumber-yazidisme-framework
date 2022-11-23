@@ -1,5 +1,19 @@
 # Selenium Cucumber Framework
 
+FIXES:
+1. chrome/firefox
+   (config/configuration.properties)
+2. fixed "glue" in src/test/java/Runners/TestRunner.java;
+3. able to run individual test in IntelliJ without any extra configuration;
+4. able to run TestRunner from src/test/java/Runners/TestRunner.java
+5. maven-command-line: mvn clean install
+6. cucumber-advance-report: target/cucumber-reports/advanced-reports/cucumber-html-reports/overview-features.html
+7. timeline-report: target/test-output-thread/index.html
+8. parallel execution controlled:
+8.1. by @DataProvider(parallel = true) in Runners/TestRunner.java:22
+8.2. by dataproviderthreadcount in pom.xml:68
+
+
 ---
 
 ## Project Purpose

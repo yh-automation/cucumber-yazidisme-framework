@@ -28,14 +28,30 @@ public class AllDriverManager {
         switch (driverType) {
             case CHROME:
                 WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--headless", "--window-size=1644,868");
-                webDriver = new ChromeDriver(chromeOptions);
+                ChromeOptions options = new ChromeOptions();
+                options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+                if (Boolean.parseBoolean(System.getProperty("headlessMode"))) {
+                    options.setHeadless(true);
+                }
+                options.addArguments("--start-maximized");
+                options.addArguments("--no-sandbox");
+                options.addArguments("--disable-dev-shm-usage");
+//                options.addArguments("--window-size=1920x1080");
+                options.setAcceptInsecureCerts(true);
+                options.setCapability("profile.password_manager_enabled", "false");
+
+                //chromeOptions.addArguments("--headless", "--window-size=1644,868");
+                options.addArguments("--window-size=1644,868");
+                options.addArguments("–disable-notifications");
+                webDriver = new ChromeDriver(options);
                 break;
             case FIREFOX:
                 WebDriverManager.firefoxdriver().setup();
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.addArguments("--headless");
+                //firefoxOptions.addArguments("--headless");
+                if (Boolean.parseBoolean(System.getProperty("headlessMode"))) {
+                    firefoxOptions.addArguments("--headless");
+                }
                 webDriver = new FirefoxDriver(firefoxOptions);
                 break;
             case EDGE:
